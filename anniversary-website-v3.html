@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Years of Love</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mali:wght@400;600&family=Sriracha&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Mali', cursive;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fff5f7, #fce7f3);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+
+        .page {
+            display: none;
+            max-width: 1000px;
+            margin: 0 auto;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* หน้ารหัสผ่าน */
+        #passwordPage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 90vh;
+            text-align: center;
+        }
+
+        .password-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .password-input {
+            display: flex;
+            gap: 10px;
+            margin: 30px 0;
+            justify-content: center;
+        }
+
+        .digit-input {
+            width: 50px;
+            height: 60px;
+            font-size: 24px;
+            text-align: center;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            background: white;
+        }
+
+        /* หน้าแกลเลอรี่ใหม่ */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: #ff69b4;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .memory-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            transform: translateX(-30px);
+            opacity: 0;
+            animation: slideIn 0.5s forwards;
+        }
+
+        .memory-item:nth-child(even) {
+            left: 50%;
+            transform: translateX(30px);
+        }
+
+        .memory-content {
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
+            position: relative;
+        }
+
+        .memory-content::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ff69b4;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .memory-item:nth-child(even) .memory-content::after {
+            left: -50px;
+            right: auto;
+        }
+
+        .memory-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .memory-date {
+            font-family: 'Sriracha', cursive;
+            color: #ff1493;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* หน้าข้อความใหม่ */
+        .love-letter {
+            max-width: 700px;
+            margin: 40px auto;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 25L60 40H40L50 25Z' fill='%23ff69b4' fill-opacity='0.1'/%3E%3C/svg%3E"), white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .love-letter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff69b4, #ff1493);
+        }
+
+        .love-letter p {
+            font-family: 'Sriracha', cursive;
+            line-height: 2;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #333;
+            text-shadow: 1px 1px 1px rgba(255, 105, 180, 0.1);
+        }
+
+        .signature {
+            text-align: right;
+            font-size: 1.3em;
+            color: #ff1493;
+            margin-top: 40px;
+        }
+
+        .music-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            box-shadow: 0 -5px 15px rgba(255, 105, 180, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+
+        h1 {
+            font-family: 'Sriracha', cursive;
+            color: #ff1493;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.2);
+        }
+
+        /* หัวใจลอย */
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            color: #ff69b4;
+            animation: float 6s ease-in-out infinite;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- หน้ารหัสผ่าน -->
+        <div id="passwordPage" class="page active">
+            <div class="password-box">
+                <h1>❤️ 5 Years Together ❤️</h1>
+                <p>กรุณาใส่รหัสผ่าน 6 หลักเพื่อเข้าสู่ความทรงจำของเรา</p>
+                <div class="password-input">
+                    <input type="password" class="digit-input" maxlength="1" data-index="0">
+                    <input type="password" class="digit-input" maxlength="1" data-index="1">
+                    <input type="password" class="digit-input" maxlength="1" data-index="2">
+                    <input type="password" class="digit-input" maxlength="1" data-index="3">
+                    <input type="password" class="digit-input" maxlength="1" data-index="4">
+                    <input type="password" class="digit-input" maxlength="1" data-index="5">
+                </div>
+                <button class="btn" onclick="checkPassword()">เข้าสู่ความทรงจำ</button>
+            </div>
+        </div>
+
+        <!-- หน้าแกลเลอรี่ใหม่ -->
+        <div id="galleryPage" class="page">
+            <h1>ย้อนรอยความทรงจำ 5 ปีของเรา</h1>
+            <div class="timeline">
+                <div class="memory-item">
+                    <div class="memory-content">
+                        <div class="memory-date">วันแรกที่เราได้พบกัน</div>
+                        <img src="/api/placeholder/400/400" alt="First meeting" class="memory-image">
+                        <p>วันที่โชคชะตาพาเราให้ได้พบกัน เป็นวันที่ทำให้ชีวิตเปลี่ยนไปตลอดกาล</p>
+                    </div>
+                </div>
+                <div class="memory-item">
+                    <div class="memory-content">
+                        <div class="memory-date">เดทแรกของเรา</div>
+                        <img src="/api/placeholder/400/400" alt="First date" class="memory-image">
+                        <p>ความประหม่าและตื่นเต้นในวันนั้น ยังคงเป็นความทรงจำที่หวานซึ้ง</p>
+                    </div>
+                </div>
+                <div class="memory-item">
+                    <div class="memory-content">
+                        <div class="memory-date">ทริปแรกด้วยกัน</div>
+                        <img src="/api/placeholder/400/400" alt="First trip" class="memory-image">
+                        <p>การเดินทางครั้งแรกของเรา เต็มไปด้วยความสุขและเสียงหัวเราะ</p>
+                    </div>
+                </div>
+                <div class="memory-item">
+                    <div class="memory-content">
+                        <div class="memory-date">วันครบรอบ 1 ปี</div>
+                        <img src="/api/placeholder/400/400" alt="First anniversary" class="memory-image">
+                        <p>1 ปีแรกที่เต็มไปด้วยความหวาน ความรัก และความเข้าใจ</p>
+                    </div>
+                </div>
+                <div class="memory-item">
+                    <div class="memory-content">
+                        <div class="memory-date">ปัจจุบัน</div>
+                        <img src="/api/placeholder/400/400" alt="Present" class="memory-image">
+                        <p>5 ปีที่ผ่านมา เราเติบโตและแข็งแกร่งขึ้นด้วยกัน</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center">
+                <button class="btn" onclick="showPage('messagePage')">อ่านจดหมายรัก ❤️</button>
+            </div>
+        </div>
+
+        <!-- หน้าจดหมายรักใหม่ -->
+        <div id="messagePage" class="page">
+            <div class="love-letter">
+                <h1>ถึงคนที่ฉันรักที่สุด ❤️</h1>
+                <p>5 ปีที่ผ่านมา...</p>
+                <p>ทุกๆ วันที่ได้อยู่กับเธอ ทำให้ฉันรู้ว่าความรักนั้นเป็นมากกว่าความรู้สึก แต่เป็นการเติบโตและเรียนรู้ไปด้วยกัน</p>
+                <p>ขอบคุณที่เป็นทั้งคู่ชีวิต เพื่อนซี้ และกำลังใจที่ดีที่สุดของฉัน</p>
+                <p>ขอบคุณที่เข้าใจกันในวันที่ดีและไม่ดี ขอบคุณที่ไม่เคยทิ้งกันไปไหน</p>
+                <p>ฉันสัญญาว่าจะรักและดูแลเธอให้ดีที่สุด จะเป็นคนที่ดีที่สุดสำหรับเธอเสมอ</p>
+                <p>ขอให้เรารักกันแบบนี้ไปตลอด เติบโตไปด้วยกัน และมีความสุขในทุกๆ วันที่เหลือ</p>
+                <div class="signature">
